@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Assignment</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <h1>Employee Detalils</h1>
+        <div>
+          <a href="/index.html"><i class="fas fa-home"></i> Home</a>
+          <a href="/list.html"><i class="fas fa-book"></i> List</a>
+          <!-- <a href="/edit.html"><i class="fas fa-pencil"></i> Edit</a> -->
+        </div>
+      </nav>
+    </header>
+
+    <div class="container">
+      <!-- onSubmit="return false" -->
+      <form>
+        <fieldset>
+          <label for="name">&nbsp Employee's Name<span>*</span> :</label
+          ><input
+            placeholder="please enter your name"
+            type="text"
+            name=""
+            id="name"
+            required
+          />
+
+          <label for="age"> Age<span>*</span> :</label
+          ><input placeholder="age" type="number" name="" id="age" required />
+
+          <fieldset>
+            <label for="gender"> &nbsp Gender<span>*</span> :</label>
+            <input type="radio" id="html" name="gender" value="Male" /><label
+              for="male"
+              >Male</label
+            >
+            <input
+              type="radio"
+              id="female"
+              name="gender"
+              value="Female"
+            /><label for="feamle">Female</label>
+          </fieldset>
+
+          <label for="department"> &nbsp Department<span>*</span> :</label>
+          <input
+            placeholder="Department"
+            type="text"
+            id="department"
+            required
+          />
+
+          <label for="designation"> &nbsp Designation<span>*</span> :</label>
+          <input
+            placeholder="Designation"
+            type="text"
+            name=""
+            id="designation"
+            required
+          />
+
+          <label for="address"> &nbsp Address<span>*</span> :</label>
+          <textarea
+            name=""
+            id="address"
+            cols="30"
+            rows="2"
+            required
+            placeholder="please enter your address"
+          ></textarea>
+        </fieldset>
+
+        <button onclick="readData()" class="btn" type="submit">Submit</button>
+      </form>
+      
+    </div>
+
+    <script>
+      function readData() {
+        var users = JSON.parse(localStorage.getItem("Users")) || [];
+        var userData = {
+          Employee: document.getElementById("name").value,
+          age: document.getElementById("age").value,
+          gender: document.querySelector("input[name='gender']:checked").value,
+          department: document.getElementById("department").value,
+          designation: document.getElementById("designation").value,
+          address: document.getElementById("address").value,
+        };
+
+        users.push(userData);
+        localStorage.setItem("Users", JSON.stringify(users));
+
+        
+
+      }
+    </script>
+  </body>
+</html>

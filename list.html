@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    h1:nth-child(3) {
+      margin-top: 100px;
+    }
+
+    td {
+      color: #f5f6f7;
+      font-weight: 600;
+    }
+
+    th {
+      text-decoration: underline;
+      font-size: 1.2rem;
+    }
+
+    th,
+    td {
+      height: 40px;
+    }
+
+    table,
+    td,
+    th {
+      border: 1px dashed darkgray;
+    }
+
+    table {
+      /* border-collapse: collapse; */
+      height: aut0;
+      width: 80%;
+      box-shadow: 0px 4px 4px rgba(169, 169, 200, 0.5);
+      overflow-x: auto;
+    
+    }
+
+
+
+    .table-container {
+      margin-top: 100px;
+      margin-bottom: 100px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .table-container>#filter-container {
+      display: inline;
+      margin-left: auto;
+      margin-right: 200px;
+      margin-bottom: 50px;
+    }
+
+    #myInput {
+      width: 200px;
+    }
+
+    h1:nth-child(2) {
+      margin-top: 50px;
+    }
+
+    @media only screen and (max-width: 450px) {
+      .table-container {
+        width: max-content;
+      }
+    }
+  </style>
+  <title>Employee list</title>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <h1>Employee Detalils</h1>
+      <div>
+        <a href="/index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="/list.html"><i class="fas fa-book"></i> List</a>
+        <!-- <a href="/edit.html"><i class="fas fa-pencil"></i> Edit</a> -->
+      </div>
+    </nav>
+  </header>
+
+  <div class="table-container">
+    <h1>Employee list</h1>
+    <div id="filter-container">
+      <label for="filter">search with department</label>
+      <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Department" title="Type in a name">
+    </div>
+    <table id="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Gender</th>
+          <th>Department</th>
+          <th>Designation</th>
+          <th>Address</th>
+        </tr>
+      </thead>
+      <tbody id="tbody1"></tbody>
+    </table>
+  </div>
+  <script>
+    let users = JSON.parse(localStorage.getItem("Users")) || [];
+    // let Employees = JSON.parse(localStorage.getItem("Employees")) || [];
+
+    let EmployeesArray = [
+      {
+        Employee: "John",
+        age: 23,
+        gender: "Male",
+        department: "Developer",
+        designation: "Frontend",
+        address: "something,123456",
+      },
+      {
+        Employee: "Sophie",
+        age: 23,
+        gender: "Female",
+        department: "Developer",
+        designation: "Backend",
+        address: "something,123456",
+      },
+      {
+        Employee: "Nishanth",
+        age: 23,
+        gender: "Male",
+        department: "HR",
+        designation: "Manager",
+        address: "something,123456",
+      },
+      {
+        Employee: "Anmol",
+        age: 23,
+        gender: "Male",
+        department: "Developer",
+        designation: "Backend",
+        address: "something,123456",
+      },
+      {
+        Employee: "Someone",
+        age: 23,
+        gender: "Male",
+        department: "UI/UX",
+        designation: "Ux designer",
+        address: "something,123456",
+      },
+      {
+        Employee: "John",
+        age: 23,
+        gender: "Male",
+        department: "Marketing",
+        designation: "something",
+        address: "something,123456",
+      },
+      {
+        Employee: "John",
+        age: 23,
+        gender: "Male",
+        department: "Marketing",
+        designation: "Operations",
+        address: "something,123456",
+      },
+      {
+        Employee: "John",
+        age: 23,
+        gender: "Male",
+        department: "Accounts",
+        designation: "Frontend",
+        address: "something,123456",
+      },
+      {
+        Employee: "John",
+        age: 23,
+        gender: "Male",
+        department: "Accounts",
+        designation: "Frontend",
+        address: "something,123456",
+      },
+      {
+        Employee: "John",
+        age: 23,
+        gender: "Male",
+        department: "Developer",
+        designation: "Frontend",
+        address: "something,123456",
+      },
+      {
+        Employee: "Sophie",
+        age: 23,
+        gender: "Female",
+        department: "Developer",
+        designation: "Backend",
+        address: "something,123456",
+      },
+      {
+        Employee: "Nishanth",
+        age: 23,
+        gender: "Male",
+        department: "HR",
+        designation: "Manager",
+        address: "something,123456",
+      },
+      {
+        Employee: "Anmol",
+        age: 23,
+        gender: "Male",
+        department: "Developer",
+        designation: "Backend",
+        address: "something,123456",
+      },
+      {
+        Employee: "Someone",
+        age: 23,
+        gender: "Male",
+        department: "UI/UX",
+        designation: "Ux designer",
+        address: "something,123456",
+      },
+      {
+        Employee: "John",
+        age: 23,
+        gender: "Male",
+        department: "Marketing",
+        designation: "something",
+        address: "something,123456",
+      },
+      {
+        Employee: "John",
+        age: 23,
+        gender: "Male",
+        department: "Marketing",
+        designation: "Operations",
+        address: "something,123456",
+      },
+      {
+        Employee: "John",
+        age: 23,
+        gender: "Male",
+        department: "Accounts",
+        designation: "Frontend",
+        address: "something,123456",
+      },
+      {
+        Employee: "John",
+        age: 23,
+        gender: "Male",
+        department: "Accounts",
+        designation: "Frontend",
+        address: "something,123456",
+      }
+    ];
+      
+    var myJson = JSON.stringify(EmployeesArray);
+    console.log(myJson)
+    // localStorage.setItem("Employees", JSON.stringify(EmployeesArray));
+
+    let html = ''
+    let table1 = document.querySelector("#tbody1");
+    let table2 = document.querySelector("#tbody2");
+    let filter = document.getElementById('filter');
+
+    for (user of JSON.parse(myJson)) {
+      let tr = table1.insertRow();
+      tr.insertCell().textContent = user.Employee;
+      tr.insertCell().textContent = user.age;
+      tr.insertCell().textContent = user.gender;
+      tr.insertCell().textContent = user.department;
+      tr.insertCell().textContent = user.designation;
+      tr.insertCell().textContent = user.address;
+    }
+
+    for (user of users) {
+      let tr = table1.insertRow();
+      tr.insertCell().textContent = user.Employee;
+      tr.insertCell().textContent = user.age;
+      tr.insertCell().textContent = user.gender;
+      tr.insertCell().textContent = user.department;
+      tr.insertCell().textContent = user.designation;
+      tr.insertCell().textContent = user.address;
+    }
+
+
+    function myFunction() {
+      let input, filter, table, tr, td, i, txtValue;
+
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+
+      table = document.getElementById("table");
+      tr = table.getElementsByTagName("tr");
+
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[3];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
+
+
+  </script>
+
+</body>
+
+</html>
